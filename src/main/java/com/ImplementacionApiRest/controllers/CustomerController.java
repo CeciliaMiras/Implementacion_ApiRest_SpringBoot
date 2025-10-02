@@ -2,6 +2,7 @@ package com.ImplementacionApiRest.controllers;
 
 import com.ImplementacionApiRest.domian.Customer;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -18,5 +19,16 @@ public class CustomerController {
     @GetMapping("clientes")
     public List<Customer>getCustomers(){
         return customers;
+    }
+    @GetMapping("clientes/{username}")
+    public Customer getCliente(@PathVariable String username){
+        for(Customer c:customers){
+            if(c.getUsername().equalsIgnoreCase(username)){
+                return c;
+            }
+
+        }
+        return null;
+
     }
 }
