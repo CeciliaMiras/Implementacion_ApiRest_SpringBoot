@@ -1,9 +1,7 @@
 package com.ImplementacionApiRest.controllers;
 
 import com.ImplementacionApiRest.domian.Customer;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,11 +14,13 @@ public class CustomerController {
             new Customer(789, "Laura Sandoval", "lauras", "secret"),
             new Customer(234, "Carlos Martinez", "carlosm", "pass")
     ));
-    @GetMapping("clientes")
+    //Muestra la lista completa de los clientes
+    @GetMapping("/clientes")
     public List<Customer>getCustomers(){
         return customers;
     }
-    @GetMapping("clientes/{username}")
+    //Muestra un cliente específico a traves de su username
+    @GetMapping("/clientes/{username}")
     public Customer getCliente(@PathVariable String username){
         for(Customer c:customers){
             if(c.getUsername().equalsIgnoreCase(username)){
@@ -30,5 +30,11 @@ public class CustomerController {
         }
         return null;
 
+    }
+    //Agregar un cliente a una lista o una base de datos
+    @PostMapping("/clientes")
+    public Customer postCliente(@RequestBody  Customer customer){
+        customers.add(customer);
+        return customer;
     }
 }
