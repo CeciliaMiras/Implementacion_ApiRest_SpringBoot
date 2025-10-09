@@ -62,4 +62,26 @@ public class CustomerController {
         return null;
     }
 
+    //Modificaciones específicas
+    @PatchMapping("/clientes")
+    public Customer patchCliente(@RequestBody Customer customer){
+        for(Customer c : customers){
+            if(c.getId()==customer.getId()){
+                if(customer.getName()!=null){
+                    c.setName(customer.getName());
+                }
+                if(customer.getUsername()!=null){
+                    c.setUsername(customer.getUsername());
+                }
+                if(customer.getPassword()!=null){
+                    c.setPassword(customer.getPassword());
+                }
+                return c;
+            }
+
+
+        }
+      return null;
+    }
+
 }
