@@ -16,11 +16,19 @@ public class CustomerController {
     ));
     //Muestra la lista completa de los clientes
     @GetMapping("/clientes")
-    public List<Customer>getCustomers(){
+    //Forma de hacerlo a nivel método
+    //@RequestMapping(method = RequestMethod.GET)
+    public List<Customer>getCustomers()
+    {
+
         return customers;
     }
+
+
     //Muestra un cliente específico a traves de su username
     @GetMapping("/clientes/{username}")
+    //Forma de hacerlo a nivel método
+    //@RequestMapping(value = "/{username}",method = RequestMethod.GET)
     public Customer getCliente(@PathVariable String username){
         for(Customer c:customers){
             if(c.getUsername().equalsIgnoreCase(username)){
@@ -33,12 +41,16 @@ public class CustomerController {
     }
     //Agregar un cliente a una lista o una base de datos
     @PostMapping("/clientes")
+    //Forma de hacerlo a nivel método
+   // @RequestMapping(method = RequestMethod.POST)
     public Customer postCliente(@RequestBody  Customer customer){
         customers.add(customer);
         return customer;
     }
     //Modificar un cliente
     @PutMapping("/clientes/{username}")
+    //Forma de hacerlo a nivel método
+    //@RequestMapping(value = "/{username}",method = RequestMethod.PUT)
     public Customer putCliente(@PathVariable String username,@RequestBody Customer customer){
         for(Customer c: customers){
           if(c.getId()==customer.getId()){
@@ -52,6 +64,8 @@ public class CustomerController {
     }
     //Eliminar un cliente
     @DeleteMapping("/clientes/{id}")
+    //Forma de hacerlo a nivel método
+    //@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public Customer deleteCliente(@PathVariable int id){
         for(Customer c : customers){
             if(c.getId()==id){
@@ -64,6 +78,8 @@ public class CustomerController {
 
     //Modificaciones específicas
     @PatchMapping("/clientes")
+    //Forma de hacerlo a nivel método
+    //@RequestMapping(method = RequestMethod.PATCH)
     public Customer patchCliente(@RequestBody Customer customer){
         for(Customer c : customers){
             if(c.getId()==customer.getId()){
